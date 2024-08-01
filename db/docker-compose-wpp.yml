@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  wpp_app:
+    container_name: wpp_app
+    image: postgres
+    environment:
+      POSTGRES_DB: wpp_db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    volumes:
+      - wpp_app:/data/wpp_app
+    ports:
+      - "5435:5432"
+    networks:
+      - wpp_app_net
+    restart: unless-stopped
+
+networks:
+  wpp_app_net:
+    driver: bridge
+
+volumes:
+  wpp_app:

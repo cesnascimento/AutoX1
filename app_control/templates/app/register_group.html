@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+Gerenciamento de Grupos/Comunidades
+{% endblock title %}
+
+{% block content %}
+<div class="card card-primary mb-4">
+    <div class="card-header">
+        <div class="card-title">
+            Cadastrar Grupos/Comunidades
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            <div id="communityFields">
+                {% for form in forms %}
+                    <div class="community-group" data-prefix="{{ forloop.counter0 }}">
+                        {% bootstrap_form form %}
+                        <hr>
+                    </div>
+                {% endfor %}
+            </div>
+            <input type="hidden" name="form_count" id="form-count" value="{{ forms|length }}">
+            <button type="button" class="btn btn-secondary" onclick="addCommunity()">Adicionar mais um grupo</button>
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Lista de Grupos/Comunidades</h3>
+    </div>
+    <div class="card-body p-3">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Origem</th>
+                    <th>Link de Convite</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for group in groups %}
+                    <tr>
+                        <td>{{ group.added_date }}</td>
+                        <td>{{ group.origin }}</td>
+                        <td>{{ group.invite_link }}</td>
+                        <td>{{ group.status_connect }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function addCommunity() {
+        let container = document.getElementById('communityFields');
+        let newCommunity = container.children[0].cloneNode(true);
+        let formCount = container.children.length;
+
+        newCommunity.querySelectorAll('input, textarea').forEach(input => {
+            input.value = '';  // Clear the value of cloned form inputs
+            let name = input.name.replace(/\d+/, formCount);
+            let id = input.id.replace(/\d+/, formCount);
+            input.name = name;
+            input.id = id;
+        });
+
+        newCommunity.dataset.prefix = formCount;
+        container.appendChild(newCommunity);
+        document.getElementById('form-count').value = formCount + 1;
+    }
+</script>
+{% endblock content %}

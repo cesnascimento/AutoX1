@@ -1,0 +1,64 @@
+{% extends 'adminlte/lib/_main_sidebar.html' %} 
+
+{% block logo %}
+<a href="#" class="brand-link">
+{% block logo_text %}
+<span class="brand-text font-weight-light"> Auto X1 </span>
+{% endblock logo_text %} 
+</a>
+{% endblock logo %}
+
+{% block user_panel %}
+{% endblock user_panel %}
+
+
+{%block nav_heading%} 
+Links de navegação 
+{%endblock nav_heading%}
+{% block nav_links %}
+{% if request.user.is_superuser %}
+    <li class="nav-item has-tree-view ">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa fa-user"></i> <p>Usuários</p>
+            <p><i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview menu-open">
+                <li class="nav-item">
+                        <a href="{% url 'list_users' %}" class="nav-link">
+                            <i class="nav-icon fas fa-circle"></i> Listar Usuário
+                        </a>
+                </li>
+                <li class="nav-item">
+                        <a href="{% url 'register' %}" class="nav-link">
+                            <i class="nav-icon fas fa-circle"></i> Cadastrar Usuário
+                        </a>
+                </li>
+                <li class="nav-item">
+                        <a href="{% url 'users_activities' %}" class="nav-link">
+                            <i class="nav-icon fas fa-circle"></i> Atividades de Usuários
+                        </a>
+                </li>
+        </ul>
+    </li>
+{% endif %}
+<li class="nav-item has-tree-view ">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-object-group"></i> <p>Puxador</p>
+        <p><i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview menu-open">
+            <li class="nav-item">
+                    <a href="{% url 'register_group' %}" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i> Grupos/Comunidades
+                    </a>
+            </li>
+            <li class="nav-item">
+                    <a href="{% url 'list_lids' %}" class="nav-link">
+                        <i class="nav-icon fas fa-circle"></i> Ultimos dados
+                    </a>
+            </li>
+    </ul>
+</li>
+{% endblock nav_links %}

@@ -1,0 +1,4 @@
+.venv/
+microservices/extract/package.json
+microservices/extract/tokens/
+microservices/extract/run_extract.sh

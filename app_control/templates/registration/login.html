@@ -1,0 +1,35 @@
+{% extends 'adminlte/login.html' %}
+{% load i18n static %}
+
+{% block logo %}
+<div class="login-logo">
+  {# Mirrors block names used in _main_header.html #}
+  <a href="#">{% block logo_text %}<b>A</b>uto <b>X</b>1{% endblock %}</a>
+</div>
+{% endblock %}
+
+{% block login_form %}
+<form action="" method="post">
+  {% csrf_token %}
+  {% if message %}
+  <p class="login-box-msg" style="color: red;">{{ message }}</p>
+  {% endif %}
+  <div class="form-group has-feedback">
+    <input name="username" class="form-control" placeholder="Email">
+    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+  </div>
+  <div class="form-group has-feedback">
+    <input type="password" name="password" class="form-control" placeholder="{% trans 'Password' %}">
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+  </div>
+  <div class="row">
+    <div class="col-xs-8">
+      {% block login_form_links %}
+      {% endblock %}
+    </div>
+    <div class="col-xs-4">
+      <button type="submit" class="btn btn-primary btn-block btn-flat">{% trans 'Login' %}</button>
+    </div>
+  </div>
+</form>
+{% endblock login_form %}
