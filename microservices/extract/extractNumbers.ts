@@ -1,6 +1,6 @@
 import { create, Whatsapp } from '@wppconnect-team/wppconnect';
 import { Client } from 'pg';
-import { dbConfig } from './dbConfig';
+import { dbConfig } from '../db/dbConfig';
 import { readGroupsDB } from './readGroupsDB';
 
 function randomDelay(min: number, max: number): number {
@@ -54,10 +54,9 @@ async function extractNumbersFromGroups(groups: string[]): Promise<void> {
     const client = await create({
         session: 'session_name',
         puppeteerOptions: { headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] },
-        autoClose: 180,
         catchQR: (qrCode) => {
             console.log(`QR Code: ${qrCode}`);
-        }
+        },
     });
     const dbClient = new Client(dbConfig);
 
