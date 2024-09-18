@@ -53,28 +53,34 @@ async function initAutoResponse(device: string) {
         try {
             if (currentStage === 0) {
                 await client.sendText(from, funnelMessages[0]);
+                await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
                 console.log(`Primeira mensagem enviada para ${from}`);
                 contactStages[from] = 1; // Avança para o estágio 1
             } else if (currentStage === 1) {
                 await client.sendFile(from, './video/video1.mp4', 'video.mp4', 'Assista o vídeo para mais informações.');
                 console.log(`Terceira mensagem enviada para ${from}`);
+                await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
                 contactStages[from] = 2; // Avança para o estágio 3
             } else if (currentStage === 2) {
                 await client.sendFile(from, './img/img1.jpeg', 'photo.jpg', 'Veja a imagem abaixo.');
                 console.log(`Quarta mensagem enviada para ${from}`);
+                await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
                 contactStages[from] = 3; // Avança para o estágio 4
             } else if (currentStage === 3) {
                 await client.sendText(from, funnelMessages[2]);
                 console.log(`Quinta mensagem enviada para ${from}`);
+                await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
                 contactStages[from] = 4; // Avança para o estágio 5
             } else if (currentStage === 4) {
                 await client.sendFile(from, './video/video2.mp4', 'video.mp4', `✅ SEU ACESSO VIP JÁ FOI LIBERADO! 🤩`);
                 await client.sendText(from, funnelMessages[3]);
                 console.log(`Sexta mensagem enviada para ${from}`);
+                await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
                 contactStages[from] = 5; // Avança para o estágio 6
             } else if (currentStage === 5) {
                 await client.sendText(from, funnelMessages[6]);
                 console.log(`Sétima mensagem enviada para ${from}`);
+                await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
                 contactStages[from] = 6; // Finaliza o funil
             }
         } catch (error) {
