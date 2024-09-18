@@ -6,9 +6,6 @@ async function sendMessages(device: string, contacts: any[]) {
     const client: Whatsapp = await create({
         session: device,
         puppeteerOptions: { headless: true },
-        catchQR: (qrCode) => {
-            console.log(`QR Code for ${device}: ${qrCode}`);
-        }
     });
 
     const dbClient = new Client(dbConfig);
@@ -20,8 +17,9 @@ async function sendMessages(device: string, contacts: any[]) {
         try {
             /* Altere o conteudo da mensagem aqui */
             /* Exemplo: await client.sendText(serialized, 'leo123'); */
-            await client.sendText(serialized, 'Your message here');
-            
+            await client.sendText(serialized, `Eiii, tudo bem? Me chamo Fernanda, sou da equipe de suporte ao cliente 🤍
+            Posso liberar o seu acesso ao Aplicativo de Inteligência Artificial que vai te mostrar as jogadas e horários certos pra você conseguir finalmente lucrar nesse mercado? (O APLICATIVO NÃO TEM CUSTO NENHUM!) 🚨
+            Caso tenha interesse, digite ”SIM” que eu te ensino agora mesmo! (Apenas 3 vagas disponíveis) 💰`);
             
             const updateQuery = 'UPDATE app_control_contacts SET message_sent = TRUE, send_date = CURRENT_TIMESTAMP WHERE serialized = $1';
             await dbClient.query(updateQuery, [serialized]);
@@ -30,7 +28,7 @@ async function sendMessages(device: string, contacts: any[]) {
 
             /* Altere o tempo de intervalo a cada mensagem aqui. Por padrão é 5 minutos */
             /* Exemplo: await new Promise(resolve => setTimeout(resolve, AQUI O MINUTOS * 60 * 1000)); */
-            await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
+            await new Promise(resolve => setTimeout(resolve, 25 * 60 * 1000));
         } catch (error) {
             console.error(`Failed to send message to ${serialized} by ${device}:`, error);
         }
@@ -50,7 +48,7 @@ async function main() {
 
     /* Lista de sessões de dispositivos. Adicione ou remova sessões conforme necessário. */
     /* Exemplo: const devices = ['session_device1', 'session_device2', 'session_device3'] */
-    const devices = ['session_device1'];
+    const devices = ['session_device1', 'session_device2', 'session_device3', 'session_device4', 'session_device5'];
 
 
     /* Divisão de contatos entre dispositivos */
