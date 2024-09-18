@@ -1,3 +1,4 @@
 .venv/
 microservices/extract/package.json
 microservices/extract/tokens/
+microservices/sendmessage/node_modules/
