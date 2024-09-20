@@ -3,5 +3,5 @@ export const dbConfig = {
     password: 'root',
     host: 'localhost',
     database: 'wpp_db',
-    port: 5434,
+    port: 5435,
 };
