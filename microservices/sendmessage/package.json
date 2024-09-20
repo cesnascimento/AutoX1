@@ -1,6 +1,5 @@
 {
   "devDependencies": {
-    "type": "module",
     "@types/node": "^22.5.5",
     "@types/pg": "^8.11.10",
     "ts-node": "^10.9.2",
